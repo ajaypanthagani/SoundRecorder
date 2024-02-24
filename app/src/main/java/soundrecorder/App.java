@@ -3,8 +3,6 @@
  */
 package soundrecorder;
 
-import javax.sound.sampled.LineUnavailableException;
-
 public class App {
 
     public static void main(String[] args) {
