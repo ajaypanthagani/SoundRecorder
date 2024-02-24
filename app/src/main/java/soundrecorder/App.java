@@ -7,43 +7,7 @@ import javax.sound.sampled.LineUnavailableException;
 
 public class App {
 
-    public static void main(String[] args) throws LineUnavailableException {
-        AudioPlayer player = AudioPlayer.getPlayer();
-        int sampleRate = 44100;
-        double duration = 30.0;
-
-        double[] frequencies = {
-                261.63, 261.63, 392.00, 392.00, 440.00, 440.00, 392.00,
-                349.23, 349.23, 329.63, 329.63, 293.66, 293.66, 261.63
-        };
-
-        double[] noteDurations = {
-                0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 1.0,
-                0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 1.0
-        };
-
-        int totalSamples = (int) (duration * sampleRate);
-        byte[] buffer = new byte[3 * totalSamples];
-
-        int idx = 0;
-
-        while (idx < totalSamples) {
-            for (int i = 0; i < frequencies.length && idx < totalSamples; i++) {
-                double frequency = frequencies[i];
-                double d = noteDurations[i];
-                int numSamples = (int) (d * sampleRate);
-
-                for (int j = 0; j < numSamples && idx < totalSamples; j++, idx++) {
-                    double time = (double) j / (double) sampleRate;
-                    int sample = (int) ((Math.sin(2 * Math.PI * frequency * time) * (1 << 23)));
-
-                    buffer[3 * idx] = (byte) ((sample >> 16) & 0xFF);
-                    buffer[3 * idx + 1] = (byte) ((sample >> 8) & 0xFF);
-                    buffer[3 * idx + 2] = (byte) (sample & 0xFF);
-                }
-            }
-        }
-
-        player.play(buffer);
+    public static void main(String[] args) {
+        System.out.println("Welcome to Sound Recorder!");
     }
 }
