@@ -6,11 +6,17 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
 
 public class AudioPlayer {
+    private static final int SAMPLE_RATE = 44100;
+    private static final int SAMPLE_SIZE_IN_BITS = 24;
+    private static final int CHANNELS = 2;
+    private static final boolean SIGNED = true;
+    private static final boolean BIG_ENDIAN = true;
+
     private final SourceDataLine line;
     private final AudioFormat audioFormat;
 
     private AudioPlayer() throws LineUnavailableException {
-        this.audioFormat = new AudioFormat(44100, 24, 1, true, true);
+        this.audioFormat = new AudioFormat(SAMPLE_RATE, SAMPLE_SIZE_IN_BITS, CHANNELS, SIGNED, BIG_ENDIAN);
         this.line = AudioSystem.getSourceDataLine(audioFormat);
     }
 
