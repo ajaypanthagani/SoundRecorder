@@ -1,11 +1,11 @@
-package soundrecorder;
+package soundrecorder.resource;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
 
-public class AudioPlayer {
+public class Player {
     private static final int SAMPLE_RATE = 44100;
     private static final int SAMPLE_SIZE_IN_BITS = 24;
     private static final int CHANNELS = 2;
@@ -15,12 +15,12 @@ public class AudioPlayer {
     private final SourceDataLine line;
     private final AudioFormat audioFormat;
 
-    private AudioPlayer() throws LineUnavailableException {
+    private Player() throws LineUnavailableException {
         this.audioFormat = new AudioFormat(SAMPLE_RATE, SAMPLE_SIZE_IN_BITS, CHANNELS, SIGNED, BIG_ENDIAN);
         this.line = AudioSystem.getSourceDataLine(audioFormat);
     }
 
-    public static AudioPlayer getPlayer() {
+    public static Player getPlayer() {
         return SingletonHolder.INSTANCE;
     }
 
@@ -37,11 +37,11 @@ public class AudioPlayer {
     }
 
     private static class SingletonHolder {
-        private static final AudioPlayer INSTANCE;
+        private static final Player INSTANCE;
 
         static {
             try {
-                INSTANCE = new AudioPlayer();
+                INSTANCE = new Player();
             } catch (LineUnavailableException e) {
                 throw new RuntimeException(e);
             }
