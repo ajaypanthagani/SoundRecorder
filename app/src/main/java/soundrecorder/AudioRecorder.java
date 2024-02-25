@@ -14,6 +14,7 @@ public class AudioRecorder {
     private static final boolean BIG_ENDIAN = true;
     private final TargetDataLine line;
     private boolean isRecording = false;
+    private byte[] audioByteStream;
 
     private AudioRecorder() throws LineUnavailableException {
         AudioFormat audioFormat = new AudioFormat(SAMPLE_RATE, SAMPLE_SIZE_IN_BITS, CHANNELS, SIGNED, BIG_ENDIAN);
@@ -25,7 +26,7 @@ public class AudioRecorder {
         return SingletonHolder.INSTANCE;
     }
 
-    public byte[] record() {
+    public void start() {
         if (!isRecording) {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             byte[] buffer = new byte[line.getBufferSize() / 5];
@@ -38,16 +39,18 @@ public class AudioRecorder {
                 outputStream.write(buffer, 0, bytesRead);
             }
 
-            return outputStream.toByteArray();
-        } else {
-            throw new RuntimeException("recording already in progress");
+            audioByteStream = outputStream.toByteArray();
         }
     }
 
-    public void stopRecording() {
+    public void stop() {
         isRecording = false;
         line.stop();
         line.close();
+    }
+
+    public byte[] getAudioByteStream() {
+        return audioByteStream;
     }
 
     private static class SingletonHolder {

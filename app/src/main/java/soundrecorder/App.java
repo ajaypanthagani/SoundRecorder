@@ -3,9 +3,4 @@
  */
 package soundrecorder;
 
-public class App {
-
-    public static void main(String[] args) {
-        System.out.println("Welcome to Sound Recorder!");
-    }
-}
+public class App { }
