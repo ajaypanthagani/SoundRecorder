@@ -52,6 +52,9 @@ tasks.named('test') {
 
 jar {
     manifest {
-        attributes 'Main-Class': 'soundrecorder.App'
+        attributes (
+                'Main-Class': 'soundrecorder.App',
+                'Application-Name': 'Sound Recorder'
+        )
     }
 }
