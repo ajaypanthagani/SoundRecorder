@@ -1,15 +1,12 @@
 package soundrecorder.resource;
 
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.TargetDataLine;
+import javax.sound.sampled.*;
 import java.io.ByteArrayOutputStream;
 
 public class Recorder {
     private static final int SAMPLE_RATE = 44100;
     private static final int SAMPLE_SIZE_IN_BITS = 24;
-    private static final int CHANNELS = 2;
+    private static final int CHANNELS = 1;
     private static final boolean SIGNED = true;
     private static final boolean BIG_ENDIAN = true;
     private final TargetDataLine line;

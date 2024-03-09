@@ -8,7 +8,7 @@ import javax.sound.sampled.SourceDataLine;
 public class Player {
     private static final int SAMPLE_RATE = 44100;
     private static final int SAMPLE_SIZE_IN_BITS = 24;
-    private static final int CHANNELS = 2;
+    private static final int CHANNELS = 1;
     private static final boolean SIGNED = true;
     private static final boolean BIG_ENDIAN = true;
 
