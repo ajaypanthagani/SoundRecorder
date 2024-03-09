@@ -1,5 +1,5 @@
-APP_NAME: "Sound Recorder"
-RECORD_IMG: "images/record.png"
+APP_NAME: "Sound RecorderComponent"
+RECORD_IMG: "images/rec.png"
 VOICE_IMG: "images/voice.png"
 PLAY_IMG: "images/play.png"
 STOP_IMG: "images/stop.png"
