@@ -27,9 +27,8 @@ public class Recorder {
             while (isRecording) {
                 int bytesRead = line.read(buffer, 0, buffer.length);
                 outputStream.write(buffer, 0, bytesRead);
+                audioByteStream = outputStream.toByteArray();
             }
-
-            audioByteStream = outputStream.toByteArray();
         }
     }
 
