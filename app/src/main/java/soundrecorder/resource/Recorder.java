@@ -1,6 +1,6 @@
 package soundrecorder.resource;
 
-import soundrecorder.interfaces.Provider;
+import soundrecorder.interfaces.Publisher;
 import soundrecorder.interfaces.Subscriber;
 
 import javax.sound.sampled.AudioFormat;
@@ -11,7 +11,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Recorder implements Provider<byte[]> {
+public class Recorder implements Publisher<byte[]> {
     private final TargetDataLine line;
     List<Subscriber<byte[]>> subscribers;
     private boolean isRecording = false;
@@ -34,7 +34,7 @@ public class Recorder implements Provider<byte[]> {
                 int bytesRead = line.read(buffer, 0, buffer.length);
                 outputStream.write(buffer, 0, bytesRead);
                 audioByteStream = outputStream.toByteArray();
-                notifyAllSubscribers(audioByteStream);
+                publish(audioByteStream);
             }
         }
     }
@@ -55,7 +55,7 @@ public class Recorder implements Provider<byte[]> {
         subscribers.remove(s);
     }
 
-    public void notifyAllSubscribers(byte[] data) {
+    public void publish(byte[] data) {
         for (var subscriber : subscribers) {
             subscriber.onNotify(data);
         }
