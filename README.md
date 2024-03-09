@@ -1,6 +1,7 @@
 # Sound Recorder
 
 Simple and functional sound recorder written in Java. Allows you to record and play any sound.
+![](app/src/main/resources/images/screenshot.png)
 
 ## System Requirements
 1. Java 17 & above
