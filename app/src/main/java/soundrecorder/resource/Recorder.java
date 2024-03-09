@@ -24,16 +24,18 @@ public class Recorder implements Provider<byte[]> {
     }
 
     public void start() {
-        isRecording = true;
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        byte[] buffer = new byte[line.getBufferSize() / 5];
-        line.start();
+        if(!isRecording){
+            isRecording = true;
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            byte[] buffer = new byte[line.getBufferSize() / 5];
+            line.start();
 
-        while (isRecording) {
-            int bytesRead = line.read(buffer, 0, buffer.length);
-            outputStream.write(buffer, 0, bytesRead);
-            audioByteStream = outputStream.toByteArray();
-            notifyAllSubscribers(audioByteStream);
+            while (isRecording) {
+                int bytesRead = line.read(buffer, 0, buffer.length);
+                outputStream.write(buffer, 0, bytesRead);
+                audioByteStream = outputStream.toByteArray();
+                notifyAllSubscribers(audioByteStream);
+            }
         }
     }
 
