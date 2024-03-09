@@ -2,6 +2,7 @@ package soundrecorder.controller;
 
 import soundrecorder.resource.Player;
 
+import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.LineUnavailableException;
 
 public class Recorder {
@@ -12,9 +13,16 @@ public class Recorder {
 
     private static Thread recorderThread;
 
-    public static void init() {
-        recorder = soundrecorder.resource.Recorder.getRecorder();
-        player = Player.getPlayer();
+    public static void init() throws LineUnavailableException {
+        int SAMPLE_RATE = 44100;
+        int SAMPLE_SIZE_IN_BITS = 24;
+        int CHANNELS = 1;
+        boolean SIGNED = true;
+        boolean BIG_ENDIAN = true;
+
+        AudioFormat format = new AudioFormat(SAMPLE_RATE, SAMPLE_SIZE_IN_BITS, CHANNELS, SIGNED, BIG_ENDIAN);
+        recorder = new soundrecorder.resource.Recorder(format);
+        player = new Player(format);
     }
 
     public static void start() {
@@ -41,12 +49,5 @@ public class Recorder {
         } catch (LineUnavailableException e) {
             System.out.println("unable to play: " + e.getMessage());
         }
-    }
-
-    public static void exit() {
-        System.out.println("exiting the sound recorder... thanks!");
-        player = null;
-        recorder = null;
-        System.exit(0);
     }
 }
